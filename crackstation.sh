@@ -132,13 +132,13 @@ try_john() {
 
     case "$algo" in
         md5)
-            echo "admin:\$dynamic_0\$hash" | sed "s/\$hash\$/$hash/" > "$hash_file"
+            echo "admin:\$dynamic_0\$hash" | sed 's/\$hash\$/'$hash'/' > "$hash_file"
             ;;
         sha1)
             echo "admin:{SHA}$hash" > "$hash_file"
             ;;
         sha256)
-            echo "admin:\$5\$rounds=5000\$salt\$hash" > "$hash_file"
+            echo "admin:\$5\$rounds=5000\$salt\$hash" | sed 's/\$hash\$/'$hash'/' > "$hash_file"
             ;;
     esac
 
